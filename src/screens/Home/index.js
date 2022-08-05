@@ -20,6 +20,11 @@ const Home = () => {
     setCustomMinute(userMinute);
   };
 
+  const paragraphHandler = (e) => {
+    const text = e.target.value;
+    const textArray = text.split(" ");
+    setCustomParagraph(textArray);
+  };
   const submitHandler = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -67,7 +72,7 @@ const Home = () => {
                 <Textarea
                   title="Paragraph"
                   value={customParagraph}
-                  onChange={(e) => setCustomParagraph(e.target.value)}
+                  onChange={paragraphHandler}
                   required={paragraph === "Custom"}
                 />
               )}
