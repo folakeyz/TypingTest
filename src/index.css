@@ -1,13 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+:root {
+  --green: #3b5202;
+  --lightGreen: #6b9109;
+  --TransparentGreen: #a1bb5e;
+}
+
+.appContainer{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #5B6366;
+  
+}
+
+.testContainer{
+display: flex;
+flex: 0.5;
+padding: 5rem;
+background: linear-gradient(180deg, #FFFFFF1F 0%, #FFFFFF59 100%) 0 0% padding-box;
+border-radius: 20px;
+color: white;
+flex-direction: column;
+}
+
+.inputFlex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.small{
+  flex-basis: 50%;
+}
+
+.large {
+  flex-basis: 100%;
+}
+
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .5rem;
+  padding: .5rem 2rem;
+}
+
+.inputContainer label {
+  font-size: 13px;
+  margin-left: .3rem;
+  margin-bottom: .5rem;
+}
+
+.inputContainer input {
+  width: 100%;
+  height: 4rem;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  padding: .5rem 2rem;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  background: white;
+}
+
+.inputContainer input:read-only {
+  background: whitesmoke
+}
+
+.inputContainer select {
+  width: 100%;
+  height: 4rem;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  background: white;
+  padding: .5rem 2rem;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+
+}
+.inputContainer textarea {
+  width: 100%;
+  height: 7rem;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  padding: .5rem 1.5rem;
+  border-radius: 10px;
+  background: white;
+}
+.inputContainer button {
+  width: 100%;
+  height: 4rem;
+  outline: none;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.btnContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+  padding: 1rem 0;
+}
+
+.btn {
+  outline: none;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.4rem;
+  border: none;
+}
+
+.btn svg {
+  margin: 0 0.5rem;
+}
+
+.loading {
+  height: 40px;
+  width: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+  animation: spinner3 800ms ease infinite;
+}
+
+@keyframes spinner3 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button:disabled {
+  background: whitesmoke;
+  color: black;
+  cursor: not-allowed;
+}
+
+.green {
+  background: var(--green);
+  color: white;
+}
+
+
+.lightGreen {
+  background: var(--lightGreen);
+  color: white;
+}
+
+.success{
+background: var(--lightGreen);;
+color: white;
+}
+.error{
+  background: crimson;
+  color: white;
+}
+.warning{
+  background: goldenrod;
+  color: black;
 }
