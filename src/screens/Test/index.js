@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import randomWords from "random-words";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { generateResult } from "../../redux/actions/testActions";
 
 const Test = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const nWords = 200;
-  const [seconds, setSeconds] = useState(0);
   const [words, setWords] = useState([]);
-  const [countDown, setCountDown] = useState(seconds);
+  const [countDown, setCountDown] = useState(0);
   const [currentInput, setCurrentInput] = useState("");
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [correct, setCorrect] = useState(0);
@@ -22,16 +23,26 @@ const Test = () => {
   const userTest = useSelector((state) => state.userTest);
   const { testInfo } = userTest;
 
-  useEffect(() => {}, [testInfo, navigate]);
-
+  useEffect(() => {
+    if (!testInfo) {
+      navigate("/");
+    } else {
+      if (testInfo.customMinute) {
+        setCountDown(testInfo.customMinute);
+      } else {
+        setCountDown(testInfo.minute);
+      }
+      if (testInfo.customParagraph) {
+        setWords(testInfo.customParagraph);
+      } else {
+        setWords(generateWords());
+      }
+    }
+  }, [testInfo, navigate]);
   useEffect(() => {
     if (status === "finished") {
-      setWords(generateWords());
-      setCurrentWordIndex(0);
-      setCorrect(0);
-      setIncorrect(0);
-      setCurrCharIndex(-1);
-      setCurrChar("");
+      dispatch(generateResult(correct, incorrect));
+      navigate("/result");
     }
     if (status !== "started") {
       setStatus("started");
@@ -42,31 +53,14 @@ const Test = () => {
             clearInterval(interval);
             setStatus("finished");
             setCurrentInput("");
-            return seconds;
+            return countDown;
           } else {
             return prevCountdown - 1;
           }
         });
       }, 1000);
     }
-  }, [status, seconds]);
-
-  useEffect(() => {
-    if (!testInfo) {
-      navigate("/");
-    } else {
-      if (testInfo.customMinute) {
-        setSeconds(testInfo.customMinute);
-      } else {
-        setSeconds(testInfo.minute);
-      }
-      if (testInfo.customParagraph) {
-        setWords(testInfo.customParagraph);
-      } else {
-        setWords(generateWords());
-      }
-    }
-  }, [testInfo, navigate]);
+  }, [status, dispatch, correct, incorrect, countDown, navigate]);
 
   function generateWords() {
     return new Array(nWords).fill(null).map(() => randomWords());
@@ -153,24 +147,7 @@ const Test = () => {
               ref={textInput}
             />
           </div>
-
-          {/* <button onClick={start} type="button">
-            Start
-          </button> */}
         </div>
-
-        {status === "finished" && (
-          <div className="score">
-            <div>
-              <p>Words per Minute:</p>
-              <h1>{correct}</h1>
-            </div>
-            <div>
-              <p>Accuracy:</p>
-              <h1>{Math.round((correct / (correct + incorrect)) * 100)}%</h1>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

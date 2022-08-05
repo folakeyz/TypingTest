@@ -36,43 +36,45 @@ const Home = () => {
   return (
     <div className="appContainer">
       <div className="testContainer">
-        <h1>Check your Typing Skills</h1>
-        <form onSubmit={submitHandler}>
-          <div className="inputFlex">
-            <Select
-              title="Select Minute"
-              options={Options.minutes}
-              value={minute}
-              onChange={(e) => setMinutes(e.target.value)}
-              required={true}
-            />
-            {minute === "Custom" && (
-              <Input
-                title="Minutes"
-                type="number"
-                value={customMinute}
-                onChange={minuteHandler}
-                required={minute === "Custom"}
+        <>
+          <h1>Check your Typing Skills</h1>
+          <form onSubmit={submitHandler}>
+            <div className="inputFlex">
+              <Select
+                title="Select Minute"
+                options={Options.minutes}
+                value={minute}
+                onChange={(e) => setMinutes(e.target.value)}
+                required={true}
               />
-            )}
-            <Select
-              title="Select Paragraph"
-              options={Options.paragraph}
-              value={paragraph}
-              onChange={(e) => setParagraph(e.target.value)}
-              required={true}
-            />
-            {paragraph === "Custom" && (
-              <Textarea
-                title="Paragraph"
-                value={customParagraph}
-                onChange={(e) => setCustomParagraph(e.target.value)}
-                required={paragraph === "Custom"}
+              {minute === "Custom" && (
+                <Input
+                  title="Minutes"
+                  type="number"
+                  value={customMinute}
+                  onChange={minuteHandler}
+                  required={minute === "Custom"}
+                />
+              )}
+              <Select
+                title="Select Paragraph"
+                options={Options.paragraph}
+                value={paragraph}
+                onChange={(e) => setParagraph(e.target.value)}
+                required={true}
               />
-            )}
-            <Button title="Start Test" loading={loading} isFullWidth={true} />
-          </div>
-        </form>
+              {paragraph === "Custom" && (
+                <Textarea
+                  title="Paragraph"
+                  value={customParagraph}
+                  onChange={(e) => setCustomParagraph(e.target.value)}
+                  required={paragraph === "Custom"}
+                />
+              )}
+              <Button title="Start Test" loading={loading} isFullWidth={true} />
+            </div>
+          </form>
+        </>
       </div>
     </div>
   );
