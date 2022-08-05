@@ -27,7 +27,7 @@ const Home = () => {
   };
 
   const userTest = useSelector((state) => state.userTest);
-  const { success, error } = userTest;
+  const { success } = userTest;
   //   get state
   if (success) {
     navigate("/test");
